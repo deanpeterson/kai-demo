@@ -1,0 +1,43 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  annotations:
+    openshift.io/display-name: granite-3-1-8b-instruct
+    serving.knative.openshift.io/enablePassthrough: 'true'
+    sidecar.istio.io/inject: 'true'
+    sidecar.istio.io/rewriteAppHTTPProbers: 'true'
+  resourceVersion: '1019888597'
+  name: granite-3-1-8b-instruct
+  namespace: ai-composer
+  finalizers:
+    - inferenceservice.finalizers
+  labels:
+    opendatahub.io/dashboard: 'true'
+spec:
+  predictor:
+    maxReplicas: 1
+    minReplicas: 1
+    model:
+      args:
+        - '--dtype=float16'
+        - '--tensor-parallel-size=2'
+      modelFormat:
+        name: vLLM
+      name: ''
+      resources:
+        limits:
+          cpu: '6'
+          memory: 20Gi
+          nvidia.com/gpu: '2'
+        requests:
+          cpu: '3'
+          memory: 16Gi
+          nvidia.com/gpu: '2'
+      runtime: granite-3-1-8b-instruct
+      storage:
+        key: aws-connection-my-storage
+        path: models/granite-3-1-8b-instruct
+    tolerations:
+      - effect: NoSchedule
+        key: nvidia.com/gpu
+        operator: Exists

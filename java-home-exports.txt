@@ -1,0 +1,2 @@
+export JAVA_HOME=/home/dpeterson/.jbang/currentjdk
+export JAVA_HOME=~/openjdk/java-21

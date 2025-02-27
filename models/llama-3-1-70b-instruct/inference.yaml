@@ -1,0 +1,20 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  annotations:
+    serving.kserve.io/autoscalerClass: external
+    serving.kserve.io/deploymentMode: RawDeployment
+  name: llama-3-3-70b-instruct
+  namespace: restore-db-test
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: vLLM
+      name: ''
+      resources: {}
+      runtime: vllm-multinode-runtime
+      storageUri: 'pvc://llama-70b-instruct-pvc/llama-3-3-70B-instruct'
+    workerSpec:
+      tensorParallelSize: 1
+      pipelineParallelSize: 8

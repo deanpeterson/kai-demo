@@ -1,0 +1,17 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  annotations:
+    serving.kserve.io/autoscalerClass: external
+    serving.kserve.io/deploymentMode: RawDeployment
+  name: e5-mistral-7b-instruct
+  namespace: restore-db-test
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: vLLM
+      name: ''
+      resources: {}
+      runtime: vllm-multinode-runtime
+      storageUri: 'pvc://e5-mistral-7b-instruct/e5-mistral-7b-instruct'

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "custom-openjdk21-rules",
+    "description": "This ruleset provides on java code bases for custom java 17 to java 21 migrations.",
+    "violations": {
+      "java21-getfirst-method": {
+        "description": "Java 21 List interface includes getFirst()",
+        "category": "mandatory",
+        "labels": [
+          "konveyor.io/target=jakarta-ee9+",
+          "konveyor.io/target=jakarta-ee",
+          "konveyor.io/target=eap8",
+          "konveyor.io/target=eap",
+          "konveyor.io/target=jws6+",
+          "konveyor.io/target=jws",
+          "konveyor.io/source=spring5",
+          "konveyor.io/target=spring6+",
+          "konveyor.io/source",
+          "discovery"
+        ],
+        "incidents": [
+          {
+            "uri": "file:///home/dpeterson/kai-demo/my-app/src/main/java/com/mycompany/app/StringList.java",
+            "message": "The error you're seeing occurs because of a change introduced in Java 21 regarding \n the use of the List interface. In Java 21, the List interface has been updated to \n include a new method called getFirst(). This method has the following signature: public String getFirst(); \n If this List is not empty, the implementation in this interface returns the result of calling get(0). \n Otherwise, it throws NoSuchElementException. Returns: the retrieved element Throws: NoSuchElementException - \n if this collection is empty",
+            "codeSnip": " 2  \n 3  import java.util.AbstractList;\n 4  import java.util.List;\n 5  import java.util.NoSuchElementException;\n 6  \n 7  public class StringList\n 8  \textends AbstractList<String>\n 9  \timplements List<String> {\n10  \n11      @Override\n12      public String getFirst() {\n13          if (size() == 0) {\n14              throw new NoSuchElementException(\"List is empty\");\n15          }\n16          return get(0);\n17      }\n18  \n19      @Override\n20      public int size() {\n21          // TODO Auto-generated method stub\n22          throw new UnsupportedOperationException(\"Unimplemented method 'size'\");",
+            "lineNumber": 12,
+            "variables": {
+              "file": "file:///home/dpeterson/kai-demo/my-app/src/main/java/com/mycompany/app/StringList.java",
+              "kind": "Method",
+              "name": "getFirst",
+              "package": "com.mycompany.app"
+            }
+          },
+          {
+            "uri": "file:///home/dpeterson/kai-demo/my-app/src/main/java/com/mycompany/app/StringList.java",
+            "message": "The error you're seeing occurs because of a change introduced in Java 21 regarding \n the use of the List interface. In Java 21, the List interface has been updated to \n include a new method called getFirst(). This method has the following signature: public String getFirst(); \n If this List is not empty, the implementation in this interface returns the result of calling get(0). \n Otherwise, it throws NoSuchElementException. Returns: the retrieved element Throws: NoSuchElementException - \n if this collection is empty",
+            "codeSnip": " 1  package com.mycompany.app;\n 2  \n 3  import java.util.AbstractList;\n 4  import java.util.List;\n 5  import java.util.NoSuchElementException;\n 6  \n 7  public class StringList\n 8  \textends AbstractList<String>\n 9  \timplements List<String> {\n10  \n11      @Override\n12      public String getFirst() {\n13          if (size() == 0) {\n14              throw new NoSuchElementException(\"List is empty\");\n15          }\n16          return get(0);\n17      }\n18  \n19      @Override\n20      public int size() {\n21          // TODO Auto-generated method stub",
+            "lineNumber": 9,
+            "variables": {
+              "file": "file:///home/dpeterson/kai-demo/my-app/src/main/java/com/mycompany/app/StringList.java",
+              "kind": "Class",
+              "name": "StringList",
+              "package": "com.mycompany.app"
+            }
+          }
+        ]
+      }
+    }
+  }
+]

@@ -2,12 +2,12 @@ apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
 metadata:
   annotations:
-    openshift.io/display-name: granite-3-1-8b-instruct
+    openshift.io/display-name: llama-3-1-8b-instruct
     serving.knative.openshift.io/enablePassthrough: 'true'
     sidecar.istio.io/inject: 'true'
     sidecar.istio.io/rewriteAppHTTPProbers: 'true'
   resourceVersion: '1019888597'
-  name: granite-3-1-8b-instruct
+  name: llama-3-1-8b-instruct
   namespace: ai-composer
   finalizers:
     - inferenceservice.finalizers
@@ -35,10 +35,10 @@ spec:
           cpu: '3'
           memory: 16Gi
           nvidia.com/gpu: '2'
-      runtime: granite-3-1-8b-instruct
+      runtime: llama-3-1-8b-instruct
       storage:
         key: aws-connection-my-storage
-        path: models/granite-3-1-8b-instruct
+        path: models/llama-3-1-8b-instruct
     tolerations:
       - effect: NoSchedule
         key: nvidia.com/gpu

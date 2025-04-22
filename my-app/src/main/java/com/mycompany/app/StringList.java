@@ -2,19 +2,17 @@ package com.mycompany.app;
 
 import java.util.AbstractList;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class StringList
 	extends AbstractList<String>
 	implements List<String> {
 
-    @Override
-    public String getFirst() {
-        if (size() == 0) {
-            throw new NoSuchElementException("List is empty");
-        }
-        return get(0);
-    }
+	public Optional<String> getFirst() {
+		return size() == 0
+				? Optional.empty()
+				: Optional.of(get(0));
+	}
 
     @Override
     public int size() {
